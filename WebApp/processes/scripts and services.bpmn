@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_14tx5ni" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="7.2.0">
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_14tx5ni" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="7.2.0">
   <bpmn:collaboration id="Collaboration_17s3se9">
     <bpmn:participant id="Participant_1somigi" processRef="Process_0e9r2d4" />
   </bpmn:collaboration>
@@ -11,14 +11,12 @@
     <bpmn:scriptTask id="scriptTask" name="Script Task">
       <bpmn:incoming>Flow_159xzcz</bpmn:incoming>
       <bpmn:outgoing>Flow_0t7z2os</bpmn:outgoing>
-      <bpmn:multiInstanceLoopCharacteristics isSequential="true" camunda:collection="(this.records)" />
       <bpmn:script>this.token.log('testing from the inside: '+this.token.data.loopKey);
 console.log('test');</bpmn:script>
     </bpmn:scriptTask>
     <bpmn:serviceTask id="serviceTask" name="Service Task" implementation="service1">
       <bpmn:incoming>Flow_0t7z2os</bpmn:incoming>
       <bpmn:outgoing>Flow_0at2lca</bpmn:outgoing>
-      <bpmn:multiInstanceLoopCharacteristics camunda:collection="(this.records)" />
     </bpmn:serviceTask>
     <bpmn:sendTask id="sendTask" name="Send Task">
       <bpmn:incoming>Flow_0at2lca</bpmn:incoming>

@@ -243,6 +243,7 @@ class DataStore extends ServerComponent  implements IDataStore {
 		// let us rebuild the query form {status: value} to >  "tokens.items.status": "wait" 
 		const result = this.translateCriteria(query);
 
+		// 查询出 instances 列表中 items 列表中 status 为 wait 状态的 数据
 		var records = await this.db.find(this.dbConfiguration.db, Instance_collection, result.query, result.projection);
 
 		this.logger.log('find items for ' + JSON.stringify(query) + " result :" + JSON.stringify(result)+" recs:"+records.length);

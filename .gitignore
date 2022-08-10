@@ -17,3 +17,5 @@
 *.njsproj.user
 *.txt
 /bin
+
+.history

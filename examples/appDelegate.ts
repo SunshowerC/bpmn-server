@@ -1,19 +1,20 @@
 
-import { IExecution, Item, FLOW_ACTION , NODE_ACTION, IExecutionContext  } from './';
-import { DefaultAppDelegate } from './index';
+import { IExecution, Item, FLOW_ACTION, NODE_ACTION, IExecutionContext } from '../index';
+import { DefaultAppDelegate } from '../index';
 
 const fs = require('fs');
 
 var seq = 1;
 
-class MyAppDelegate extends DefaultAppDelegate{
+class MyAppDelegate extends DefaultAppDelegate {
     constructor(logger = null) {
         super(logger);
         this.servicesProvider = new MyServices();
     }
 
     async executionStarted(execution: IExecutionContext) {
-        await super.executionStarted(execution);}
+        await super.executionStarted(execution);
+    }
     async executionEvent({ event, item, execution }) {
         let object;
         if (event.startsWith('execution.'))
@@ -22,7 +23,7 @@ class MyAppDelegate extends DefaultAppDelegate{
             object = item;
     }
     async messageThrown(messageId, data, matchingQuery, item: Item) {
-        await super.messageThrown(messageId, data, matchingQuery,item);
+        await super.messageThrown(messageId, data, matchingQuery, item);
     }
     async signalThrown(signalId, data, matchingQuery, item: Item) {
         await super.signalThrown(signalId, data, matchingQuery, item);
@@ -63,4 +64,4 @@ class MyServices {
         item.token.log("SERVICE 1" + item.token.currentNode.id);
     }
 }
-export {MyAppDelegate}
+export { MyAppDelegate }

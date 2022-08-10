@@ -4,7 +4,7 @@ var bodyParser = require('body-parser')
 
 const FS = require('fs');
 
-import { BPMNServer, dateDiff, Behaviour_names   } from '../';
+import { BPMNServer, dateDiff, Behaviour_names   } from '../../';
 import { configuration as config} from '../configuration';
 
 const bpmnServer = new BPMNServer(config);
@@ -78,7 +78,7 @@ const awaitAppDelegateFactory = (middleware) => {
 
         let processName = request.params.processName;
 
-        let context = await bpmnServer.engine.start(processName, { caseId: caseId++ });
+        let context = await bpmnServer.engine.start(processName, { caseId: caseId++, random: 12 });
 
         if (context.errors) {
             displayError(response, context.errors);

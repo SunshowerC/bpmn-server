@@ -78,11 +78,14 @@ class MyServices {
             console.log(" Hi this is the serviceTask from appDelegate says bye");
         });
     }
-    add({ v1, v2 }) {
+    add(input, context) {
+        const { v1, v2 } = input
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("Add Service");
+            console.log("Add Service2", context, input);
             console.log(v1, v2);
-            return v1 + v2;
+            const addresult = v1 + v2;
+            context.instance.data['result'] = addresult
+            console.log("Add Service2", context, input);
         });
     }
     service1(input, context) {
@@ -90,6 +93,9 @@ class MyServices {
             let item = context.item;
             seq++;
             yield delay(3000 - (seq * 100), 'test');
+            context['output']['result'] = {
+                someResult: [2,34,5]
+            }
             item.token.log("SERVICE 1" + item.token.currentNode.id);
         });
     }
