@@ -50,8 +50,10 @@ class MyServices {
         await delay(5000, 'test');
         console.log(" Hi this is the serviceTask from appDelegate says bye");
     }
-    async add({ v1, v2 }) {
-        console.log("Add Service");
+    async add(input, context) {
+        console.log("Add Service", input, context);
+        const {v1, v2} = input
+        
         console.log(v1, v2);
         return v1 + v2;
     }

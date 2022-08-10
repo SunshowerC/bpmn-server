@@ -10,7 +10,7 @@
   },
   "include": [
     "**/*.ts"
-  ],
+, "examples/2-async-exec.js"  ],
   "exclude": [
     "node_modules" , "./dist" , "./tools"
   ]

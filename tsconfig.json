@@ -2,7 +2,7 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es6",
-    "lib": [ "es6" ],
+    "lib": [ "es6", "ESNext" ],
     "sourceMap": true,
     "declaration": true ,
 /*    "rootDir": "./src",*/
@@ -10,7 +10,7 @@
   },
   "include": [
     "**/*.ts", "test/handler.js"
-  ],
+, "examples/1-api-invoke.js"  ],
   "exclude": [
     "node_modules" , "./dist" , "./webApp"
   ]

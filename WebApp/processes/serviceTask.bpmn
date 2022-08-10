@@ -23,6 +23,7 @@
     <bpmn2:serviceTask id="Task_1gpov6r" name="add" implementation="add">
       <bpmn2:extensionElements>
         <camunda:script event="transformOutput"><![CDATA[
+        console.log('this.context', this.context)
         this.context.response.output={v1: this.data.v1 , v2: this.data.v2};
         ]]></camunda:script>
         <camunda:script event="transformInput"><![CDATA[
