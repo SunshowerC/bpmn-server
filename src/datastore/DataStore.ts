@@ -9,7 +9,7 @@ const fs = require('fs');
 const MongoDB = require('./MongoDB').MongoDB;
 
 
-const Instance_collection = 'wf_instances';
+const Instance_collection = 'bpmn_instance_tab';
 const Events_collection = 'wf_events';
 
 
@@ -119,7 +119,7 @@ class DataStore extends ServerComponent  implements IDataStore {
 	private getItemsFromInstances(instances, condition = null) {
 		const items = [];
 		instances.forEach(instance => {
-			instance.items.forEach(i => {
+			instance?.items?.forEach(i => {
 				let pass = true;
 
 				if (condition) {

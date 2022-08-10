@@ -10,7 +10,7 @@ const Path = require('path')
 const MongoDB = require('./MongoDB').MongoDB;
 
 
-const Definition_collection = 'wf_models';
+const Definition_collection = 'bpmn_model_tab';
 const Events_collection = 'wf_events';
 
 class ModelsDatastoreDB extends ServerComponent implements IModelsDatastore {
