@@ -145,10 +145,8 @@ class ModelsDatastoreDB extends ServerComponent implements IModelsDatastore {
         await this.db.update(this.dbConfiguration.db, Definition_collection,
             { name: model.name },
             {
-                $set:
-                {
+        
                     events: model.events
-                }
             }, { upsert: false });
 
 
@@ -169,10 +167,9 @@ class ModelsDatastoreDB extends ServerComponent implements IModelsDatastore {
             await this.db.update(this.dbConfiguration.db, Definition_collection,
                 { name: model.name },
                 {
-                    $set:
-                    {
+                
                         name: model.name, saved: model.saved, source: model.source, svg: model.svg, processes: model.processes, events: model.events
-                    }
+               
                 }, { upsert: true });
 
 
@@ -189,10 +186,9 @@ class ModelsDatastoreDB extends ServerComponent implements IModelsDatastore {
         await this.db.update(this.dbConfiguration.db, Definition_collection,
             { name: name },
             {
-                $set:
-                {
+            
                     name: newName
-                }
+          
             }, { upsert: false });
 
 

@@ -13,7 +13,7 @@ const Instance_collection = 'bpmn_instance_tab';
 const Events_collection = 'wf_events';
 
 
-class DataStore extends ServerComponent  implements IDataStore {
+class DataStore extends ServerComponent implements IDataStore {
 
 	dbConfiguration;
 	db;
@@ -41,7 +41,7 @@ class DataStore extends ServerComponent  implements IDataStore {
 		let self = this;
 		listener.on('end', async function ({ item, event }) {
 			if (!self.isRunning) {
-				await self.check(event,item);
+				await self.check(event, item);
 			}
 		});
 
@@ -160,16 +160,12 @@ class DataStore extends ServerComponent  implements IDataStore {
 			await this.db.insert(this.dbConfiguration.db, Instance_collection, [instance]);
 
 			this.logger.log("inserting instance");
-		}
-		else {
+		} else {
 			this.promises.push(this.db.update(this.dbConfiguration.db, Instance_collection,
 				{ id: instance.id },
 				{
-					$set:
-					{
 						tokens: instance.tokens, items: instance.items, loops: instance.loops,
 						endedAt: instance.endedAt, status: instance.status, saved: instance.saved, logs: instance.logs, data: instance.data
-					}
 				}));
 
 			this.logger.log("updating instance");
@@ -205,7 +201,7 @@ class DataStore extends ServerComponent  implements IDataStore {
 			return results[0];
 
 	}
-	async findInstances(query, option: 'summary' | 'full' | any ='summary') {
+	async findInstances(query, option: 'summary' | 'full' | any = 'summary') {
 
 		let projection;
 
@@ -218,24 +214,24 @@ class DataStore extends ServerComponent  implements IDataStore {
 		return records;
 	}
 	/**
-            * scenario:
-            * itemId			{ items { id : value } }
-            * itemKey			{ items {key: value } }
-            * instance, task	{ instance: { id: instanceId }, items: { elementId: value }}
-            * message			{ items: { messageId: nameofmessage, key: value } {}
-            * status			{ items: {status: 'wait' } }
-            * custom: { query: query, projection: projection }
+						* scenario:
+						* itemId			{ items { id : value } }
+						* itemKey			{ items {key: value } }
+						* instance, task	{ instance: { id: instanceId }, items: { elementId: value }}
+						* message			{ items: { messageId: nameofmessage, key: value } {}
+						* status			{ items: {status: 'wait' } }
+						* custom: { query: query, projection: projection }
 
 	New approach:
 		just like MongoDB
-	        * itemId			{ items { id : value } }
-            * itemKey			{ items {key: value } }
-            * instance, task	{ instance: { id: instanceId }, items: { elementId: value }}
-            * message			{ items: { messageId: nameofmessage, key: value } {}
-            * status			{ items: {status: 'wait' } }
-            * custom: { query: query, projection: projection }
+					* itemId			{ items { id : value } }
+						* itemKey			{ items {key: value } }
+						* instance, task	{ instance: { id: instanceId }, items: { elementId: value }}
+						* message			{ items: { messageId: nameofmessage, key: value } {}
+						* status			{ items: {status: 'wait' } }
+						* custom: { query: query, projection: projection }
 
-            
+					  
 	 *
 	 * @param query
 	 */
@@ -246,7 +242,7 @@ class DataStore extends ServerComponent  implements IDataStore {
 		// 查询出 instances 列表中 items 列表中 status 为 wait 状态的 数据
 		var records = await this.db.find(this.dbConfiguration.db, Instance_collection, result.query, result.projection);
 
-		this.logger.log('find items for ' + JSON.stringify(query) + " result :" + JSON.stringify(result)+" recs:"+records.length);
+		this.logger.log('find items for ' + JSON.stringify(query) + " result :" + JSON.stringify(result) + " recs:" + records.length);
 
 		//		return this.getItemsFromInstances(records,query);
 		return this.getItemsFromInstances(records, null);
@@ -272,7 +268,7 @@ class DataStore extends ServerComponent  implements IDataStore {
 		return { query: query, projection: projection };
 	}
 
-private translateCriteria2(criteria) {
+	private translateCriteria2(criteria) {
 
 		let match = {};
 		let query = {};
@@ -360,16 +356,16 @@ private translateCriteria2(criteria) {
 	async deleteInstances(query) {
 
 		this.cache.shutdown();
-		return await this.db.remove(this.dbConfiguration.db, Instance_collection, query );
+		return await this.db.remove(this.dbConfiguration.db, Instance_collection, query);
 
 	}
 	// db.collection.createIndex({ "a.loc": 1, "a.qty": 1 }, { unique: true })
-    /**
-     * first time installation of DB
-     * 
-     * creates a new collection and add an index
-     * 
-     * */
+	/**
+	 * first time installation of DB
+	 * 
+	 * creates a new collection and add an index
+	 * 
+	 * */
 	async install() {
 		return await this.db.createIndex(this.dbConfiguration.db, Instance_collection, { id: 1 }, { unique: true });
 	}
